@@ -12,3 +12,5 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+Route::POST('/profilesetting', [UserController::class, 'profilesetting'])->name('profilesetting');
+Route::POST('/changespassowrd', [UserController::class, 'changespassowrd'])->name('changespassowrd');
