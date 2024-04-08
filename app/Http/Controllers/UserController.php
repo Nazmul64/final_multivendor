@@ -5,10 +5,15 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Mail\SingleOffer;
+use Illuminate\Support\Facades\Mail;
 class UserController extends Controller
 {
     public function profile(){
-       return view('profilesetting');
+       return view('profilesetting',[
+
+       ]
+    );
     }
     public function profilesetting(Request $request)
     {
@@ -52,5 +57,13 @@ class UserController extends Controller
         }else{
             return back()->withErrors('Old Password Does Not Match in our records');
         }
+    }
+ public function emailoffer(){
+    return view('emailoffer',[
+            'email' => User::where('role', '!=', 2)->get(),
+    ]);
+ }
+    public function singleoffer(Request $request){
+        Mail::to(Auth::user()->email)->send(new SingleOffer);
     }
 }

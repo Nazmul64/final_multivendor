@@ -176,11 +176,14 @@
                             <div class="dropdown-divider"></div>
 
                             <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <a href="{{ route('logout') }}" class="dropdown-item notify-item" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
                                 <i class="fe-log-out"></i>
                                 <span>Logout</span>
                             </a>
-
+                           <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                          </form>
                         </div>
                     </li>
 
@@ -244,7 +247,9 @@
 
                         <ul class="metismenu" id="side-menu">
 
-                            <li class="menu-title">Navigation</li>
+                            <li class="menu-title">
+                              {{(auth()->user()->role==2)?'Admin':'Customer'}}
+                            </li>
 
                             <li>
                                 <a href="{{ route('home') }}">
@@ -252,6 +257,8 @@
                                     <span> Home </span>
                                 </a>
                             </li>
+
+                            @if (Auth::user()->role==2)
 
                             <li>
                                 <a href="javascript: void(0);">
@@ -263,22 +270,24 @@
                                     <li>
                                         <a href="javascript: void(0);">Level 1.1</a>
                                     </li>
-                                    <li>
-                                        <a href="javascript: void(0);" aria-expanded="false">Level 1.2
-                                            <span class="menu-arrow"></span>
-                                        </a>
-                                        <ul class="nav-third-level nav" aria-expanded="false">
-                                            <li>
-                                                <a href="javascript: void(0);">Level 2.1</a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript: void(0);">Level 2.2</a>
-                                            </li>
-                                        </ul>
+                                     <li>
+                                        <a href="javascript: void(0);">Level 1.1</a>
                                     </li>
                                 </ul>
                             </li>
-
+                             <li>
+                                <a href="{{ route('emailoffer')}}">
+                                    <i class="fe-folder-plus"></i>
+                                    <span> EmailOffer </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul class="nav-second-level nav" aria-expanded="false">
+                                    <li>
+                                        <a href="javascript: void(0);">Level 1.1</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            @endif
                         </ul>
 
                     </div>
@@ -404,7 +413,13 @@
 
         <!-- Vendor js -->
         <script src="{{ asset('dashboard/assets/js/vendor.min.js') }}"></script>
+ <!--C3 Chart-->
+        <script src="{{ asset('dashboard/assets/libs/d3/d3.min.js') }}"></script>
+        <script src="{{ asset('dashboard/assets/libs/c3/c3.min.js') }}"></script>
 
+        <script src="{{ asset('dashboard/assets/libs/echarts/echarts.min.js') }}"></script>
+
+        <script src="{{ asset('dashboard/assets/js/pages/dashboard.init.js') }}"></script>
         <!-- App js -->
         <script src="{{ asset('dashboard/assets/js/app.min.js') }}"></script>
 
