@@ -5,8 +5,8 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">Add Category</div>
-                @if ( session('name'))
-                    <span class="alert alert-info">{{ session('name') }}</span>
+                @if ( session('category'))
+                    <span class="alert alert-info">{{ session('category') }}</span>
                 @endif
                 <div class="card-body">
                    <form method="POST" action="{{ route('category.store') }}"enctype="multipart/form-data">

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name_category');
             $table->string('category_tagline');
-            $table->string('category_photo');
+            $table->string('category_photo')->nullable();
             $table->timestamps();
         });
     }
