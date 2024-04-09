@@ -275,8 +275,20 @@
                                 </a>
                                 <ul class="nav-second-level" aria-expanded="false">
                                     <li><a href="{{route('category.create')}}">Add Category</a></li>
-                                    <li><a href="">List Category</a></li>
+                                    <li><a href="{{ route('category.index') }}">List Category</a></li>
                                 </ul>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">
+                                    <i class="fe-sidebar"></i>
+                                    <span>  Add Vendor </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="{{ route('vendor.create') }}">Add Vendor</a></li>
+                                    <li><a href="">List Vendor</a></li>
+                                </ul>
+                            </li>
                             </li>
                             @endif
                         </ul>

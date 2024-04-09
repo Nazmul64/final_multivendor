@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\VendorController;
 
 Auth::routes();
 
@@ -22,3 +23,4 @@ Route::get('/singleoffer/{id}', [UserController::class, 'singleoffer'])->name('s
 
 
 Route::resource('category', CategoryController::class);
+Route::resource('vendor', VendorController::class);

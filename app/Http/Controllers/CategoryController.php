@@ -12,7 +12,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+       return view('category.index',[
+        'categories'=>categories::all(),
+       ]);
     }
 
     /**
@@ -23,30 +25,7 @@ class CategoryController extends Controller
       return view('category.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    // public function store(Request $request)
-    // {
-    //     $request->validate([
-    //         'name_category'=>'required',
-    //         'category_tagline' => 'required',
-    //         'category_photo' => 'required',
-    //     ]);
-    //   if($request->hasFile('category_photo')){
-    //    $file=$request->file('category_photo');
-    //    $filename=time() . '.' . $file->getClientOriginalExtension();
-    //    $path= "uploads/category_photos";
-    //    $request->category_photo->move($filename,$path);
-    //    categories::insert([
-    //     'name_category' => $request['name_category'],
-    //     'category_tagline' => $request['category_tagline'],
-    //     'category_photo' => $filename,
-    //    ]);
-    //    return back()->with('category','Category Image uploads successfully');
-    //   }
 
-    // }
     public function store(Request $request)
     {
         $request->validate([
@@ -80,7 +59,9 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        //
+      return view('category.show',[
+        'details'=>categories::all(),
+      ]);
     }
 
     /**
@@ -88,7 +69,9 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $category=categories::find($id);
+      return view('category.edit',compact('category'));
+      return back()->with('edit', 'Category image uploaded successfully');
     }
 
     /**
@@ -96,7 +79,22 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+       if($request->hasFile('new_category_photo')){
+            unlink('uploads/category_photos/' . Categories::find($id)->category_photo);
+        $file = $request->file('new_category_photo');
+        $filename = time() . '.' . $file->getClientOriginalExtension();
+        $path = "uploads/category_photos/";
+        $file->move($path, $filename);
+            categories::find($id)->update([
+                'category_photo' => $filename,
+            ]);
+       }
+        categories::find($id)->update([
+             'name_category' => $request->name_category,
+            'category_tagline' => $request->category_tagline,
+            'status' => $request->status,
+        ]);
+        return back();
     }
 
     /**
@@ -104,6 +102,9 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+     $category =categories::find($id);
+        unlink('uploads/category_photos/'.$category->category_photo);
+     $category ->delete();
+      return back()->with('delete','Your data deleted successfully');
     }
 }
