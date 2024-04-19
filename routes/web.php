@@ -7,11 +7,13 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\VendorController;
+use App\Http\Controllers\ProductController;
 
 Auth::routes();
 
 
 Route::get('/', [FrontendController::class, 'frontend'])->name('frontend');
+Route::get('product/details/{slug}', [FrontendController::class, 'productdetails'])->name('productdetails');
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/profile', [UserController::class, 'profile'])->name('profile');
@@ -24,3 +26,4 @@ Route::get('/singleoffer/{id}', [UserController::class, 'singleoffer'])->name('s
 
 Route::resource('category', CategoryController::class);
 Route::resource('vendor', VendorController::class);
+Route::resource('product', ProductController::class);

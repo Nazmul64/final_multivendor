@@ -248,7 +248,13 @@
                         <ul class="metismenu" id="side-menu">
 
                             <li class="menu-title">
-                              {{(auth()->user()->role==2)?'Admin':'Customer'}}
+                              @if (auth()->user()->role==1)
+                                Customer
+                               @elseif (auth()->user()->role==2)
+                               Admin
+                               @else
+                               Vendor
+                                @endif
                             </li>
 
                             <li>
@@ -289,6 +295,20 @@
                                     <li><a href="">List Vendor</a></li>
                                 </ul>
                             </li>
+                            </li>
+                            @endif
+
+                            @if(Auth::user()->role==3)
+                               <li>
+                                <a href="javascript: void(0);">
+                                    <i class="fe-sidebar"></i>
+                                    <span> Product </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="{{ route('product.create') }}">Add Product</a></li>
+                                    <li><a href="{{  route('product.index') }}">List Product</a></li>
+                                </ul>
                             </li>
                             @endif
                         </ul>

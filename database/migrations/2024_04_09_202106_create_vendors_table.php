@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('vendors', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id');
+            $table->string('address');
             $table->timestamps();
         });
     }
