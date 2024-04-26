@@ -322,7 +322,7 @@
                             <ul class="d-flex">
                                 <li>
                                     <a href="#">
-                                        {{ App\Models\Category::find($single_product_info->name_category) }}
+                                       {{App\Models\categories::find($single_product_info->category_id)->name_category}}
                                     </a>
                                 </li>
 

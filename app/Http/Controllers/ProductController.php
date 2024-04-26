@@ -28,6 +28,7 @@ class ProductController extends Controller
        return view('product.create',[
         'active_category'=>categories::where('status','show')->get()
        ]);
+
     }
 
     /**
@@ -35,6 +36,13 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+
+        if ($request->hasFile('product_photo')) {
+            $file = $request->file('product_photo');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $path = "uploads/product_photos/";
+            $file->move($path, $filename);
+        }
        $lug= Str::slug($request->product_name) . "-" . Str::random(5).Auth()->id();
        $request->validate([
             'category_id'=>'required',
@@ -43,7 +51,7 @@ class ProductController extends Controller
             'product_short_description' => 'required',
             'product_full_description' => 'required',
             'product_code' => 'required',
-            'product_photo' => 'required',
+
 
        ]);
 
@@ -55,7 +63,7 @@ class ProductController extends Controller
        'product_short_description'=> $request->product_short_description,
        'product_full_description'=> $request->product_full_description,
        'product_code'=> $request->product_code,
-       'product_photo'=>"hodai",
+       'product_photo'=> $filename,
        'product_slug' => $lug,
       ]);
       return back();

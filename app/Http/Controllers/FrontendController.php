@@ -23,7 +23,7 @@ class FrontendController extends Controller
     public function productdetails($slug)
     {
 
-       $single_product_info=product::where('product_slug',$slug)->first();
+       $single_product_info=product::where('product_slug',$slug)->firstOrFail();
         return view('frontend.productdetails',compact('single_product_info'));
     }
 }

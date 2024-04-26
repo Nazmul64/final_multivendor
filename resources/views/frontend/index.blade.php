@@ -152,7 +152,7 @@
                                     <div class="product">
                                         <div class="thumb">
                                             <a href="single-product.html" class="image">
-                                                <img src="{{asset('frontend')}}/assets/images/product-image/1.jpg" alt="Product" />
+                                                <img src="{{asset('uploads/product_photos')}}/{{ $product->product_photo }}" alt="Product" />
                                                 <img class="hover-image" src="{{asset('frontend')}}/assets/images/product-image/2.jpg"
                                                     alt="Product" />
                                             </a>
